@@ -10,39 +10,39 @@ def ref_glass(y,x):
     d = 0
     x -= 1
     while True:
-        newy = y + dy[d]
-        newx = x + dx[d]
-        if newx < 0 or newx >= n or newy <0 or newy >= n:
+        y += dy[d]
+        x += dx[d]
+        if x < 0 or x >= n or y <0 or y >= n:
             return
         elif d == 0: #오른쪽
-            if arr[newy][newx] == 1:
+            if arr[y][x] == 1:
                 d = 3
                 cnt += 1
-            elif arr[newy][newx] == 2:
+            elif arr[y][x] == 2:
                 d = 1
                 cnt += 1
 
         elif d == 1: #아래
-            if arr[newy][newx] == 1:
+            if arr[y][x] == 1:
                 d = 2
                 cnt += 1
-            elif arr[newy][newx] == 2:
+            elif arr[y][x] == 2:
                 d = 0
                 cnt += 1
 
         elif d == 2: #왼쪽
-            if arr[newy][newx] == 1:
+            if arr[y][x] == 1:
                 d = 1
                 cnt += 1
-            elif arr[newy][newx] == 2:
+            elif arr[y][x] == 2:
                 d = 3
                 cnt += 1
 
         elif d == 3: #위
-            if arr[newy][newx] == 1:
+            if arr[y][x] == 1:
                 d = 0
                 cnt += 1
-            elif arr[newy][newx] == 2:
+            elif arr[y][x] == 2:
                 d = 2
                 cnt += 1
 
@@ -59,3 +59,5 @@ for tc in range(1,t+1):
                 break
         break
     print('#{} {}'.format(tc, cnt))
+
+
