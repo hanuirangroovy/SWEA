@@ -4,15 +4,16 @@ dy = [0,1,0,-1]
 sig= ['U','R','D','L']
 
 def signal(x,y):
+    global direction
     lst = []
-    for dir in range(4):
+    for i in range(4):
         cnt = 1
+        dir = i
         newx = x + dx[dir]
         newy = y + dy[dir]
-        while 0 <= newx <n and 0<= newy < n and arr[newx][newy] != 'C':
+        while 0 <= newx <n and 0<= newy < m and arr[newx][newy] != 'C':
 
             if arr[newx][newy] == '/':
-                cnt += 1
                 if dir == 0:
                     dir = 1
                 elif dir == 1:
@@ -22,7 +23,6 @@ def signal(x,y):
                 elif dir == 3:
                     dir = 2
             if arr[newx][newy] == '\\':
-                cnt += 1
                 if dir == 0:
                     dir = 3
                 elif dir == 1:
@@ -35,17 +35,31 @@ def signal(x,y):
             newx += dx[dir]
             newy += dy[dir]
             if newx == x and newy == y and i==dir:
-                print("Voyager")
-                return
+                direction = sig[i]
+                return -1
         lst.append(cnt)
 
-    print(lst)
-    #print(max(lst))
-
+    max_lst = max(lst)
+    if lst[0] == max_lst:
+        direction = 'U'
+    if lst[1] == max_lst:
+        direction = 'R'
+    if lst[2] == max_lst:
+        direction = 'D'
+    if lst[3] == max_lst:
+        direction = 'L'
+    return max_lst
 
 n, m = map(int,input().split())
 arr = [list(input()) for _ in range(n)]
 pr, pc = map(int,input().split())
 x = pr - 1
 y = pc - 1
-signal(x,y)
+direction = ''
+
+result = signal(x,y)
+print(direction)
+if result == -1:
+    print('Voyager')
+else:
+    print(result)
